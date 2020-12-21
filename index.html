@@ -38,6 +38,7 @@
 
       var handleFormSubmit = function (e) {
         e.preventDefault();
+        console.log(e);
 
         if (emailRegex.test(e.target[0].value)) {
           var formData = {
