@@ -13,25 +13,48 @@
   </head>
   <body>
     <div class="container my-5">
-      <label>Your email</label>
-      <input type="text" class="form-control" />
-      <p></p>
+      <form method="POST">
+        <div class="form-group">
+          <label>Your email</label>
+          <input type="text" class="form-control" name="username" />
+          <p id="usernameResult"></p>
+        </div>
+        <div class="form-group">
+          <label>Your password</label>
+          <input type="password" class="form-control" name="password" />
+          <p id="passwordResult"></p>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+      </form>
     </div>
 
     <script>
+      var form = document.querySelector('form');
       var nameInput = document.querySelector('input');
-      var result = document.querySelector('p');
+      var usernameResult = document.querySelector('#usernameResult');
+      var passwordResult = document.querySelector('#passwordResult');
+
       var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-      var inputHandler = function (args) {
-        if (emailRegex.test(args.target.value)) {
-          result.innerHTML = 'Correct email';
+      var handleFormSubmit = function (e) {
+        e.preventDefault();
+
+        if (emailRegex.test(e.target[0].value)) {
+          var formData = {
+            username: e.target[0].value,
+            password: e.target[1].value,
+          };
+
+          usernameResult.innerHTML = 'Correct email';
+          usernameResult.className = 'text-success';
+          console.log('Form data', formData);
         } else {
-          result.innerHTML = 'Incorrect email';
+          usernameResult.innerHTML = 'Incorrect email';
+          usernameResult.className = 'text-danger';
         }
       };
 
-      nameInput.addEventListener('input', inputHandler);
+      form.addEventListener('submit', handleFormSubmit);
     </script>
   </body>
 </html>
