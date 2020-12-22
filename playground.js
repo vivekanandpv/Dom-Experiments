@@ -60,3 +60,17 @@ const persons = [
     email: 'aguirardin9@ftc.gov',
   },
 ];
+
+const newPersons = persons
+  .filter((p) => p.id % 2 === 0)
+  .map((p) => {
+    const emailSplit = p.email.split('@');
+    return {
+      id: p.id,
+      fullName: p.firstName + ' ' + p.lastName,
+      username: emailSplit[0],
+      domain: emailSplit[1],
+    };
+  });
+
+console.log(newPersons);
